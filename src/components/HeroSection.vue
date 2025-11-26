@@ -116,9 +116,12 @@ const getCardStyle = (index: number) => {
   const currentAngle = (rotation.value + index * angleStep) % 360
   const rad = (currentAngle * Math.PI) / 180
   
+  // Responsive parameters
+  const isMobile = window.innerWidth < 640
+  
   // Ellipse parameters
-  const radiusX = 240 // Wider
-  const radiusZ = 120 // Deeper
+  const radiusX = isMobile ? 140 : 240 // Reduced width on mobile
+  const radiusZ = isMobile ? 80 : 120 // Reduced depth on mobile
   
   const x = Math.sin(rad) * radiusX
   const z = Math.cos(rad) * radiusZ
@@ -127,9 +130,10 @@ const getCardStyle = (index: number) => {
   const y = z * 0.4
 
   // Exaggerated scale: Front bigger, back smaller
-  // z range: -120 to 120
-  // scale range target: ~0.5 to ~1.2
-  const scale = 0.85 + (z / 300)
+  // z range: -120 to 120 (desktop) or -80 to 80 (mobile)
+  const scaleBase = isMobile ? 0.75 : 0.85
+  const scaleFactor = isMobile ? 200 : 300
+  const scale = scaleBase + (z / scaleFactor)
   
   const opacity = (z + 200) / 320 // Opacity based on depth
   const zIndex = Math.round(z)

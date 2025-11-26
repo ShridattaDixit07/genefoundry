@@ -9,7 +9,7 @@ const cards = [
     content: [
       { key: 'source', value: '"gnomAD v4.0"', color: 'text-green-700' },
       { key: 'gene', value: '"PKD1"', color: 'text-blue-700' },
-      { key: 'af_popmax', value: '0.000042', color: 'text-orange-700' },
+      { key: 'af_popmax', value: '0.000042', color: 'text-amber-800' },
       { key: 'status', value: '"VERIFIED"', color: 'text-primary font-bold' }
     ]
   },
@@ -18,7 +18,7 @@ const cards = [
     title: 'mcp-server-gtex',
     content: [
       { key: 'tissue', value: '"Kidney_Cortex"', color: 'text-purple-700' },
-      { key: 'tpm', value: '45.2', color: 'text-orange-700' },
+      { key: 'tpm', value: '45.2', color: 'text-amber-800' },
       { key: 'isoform', value: '"ENST0000..."', color: 'text-blue-700' },
       { key: 'expression', value: '"HIGH"', color: 'text-primary font-bold' }
     ]
@@ -38,7 +38,7 @@ const cards = [
     title: 'mcp-server-mgi',
     content: [
       { key: 'model', value: '"Pkd1<tm1..."', color: 'text-purple-700' },
-      { key: 'phenotype', value: '"Cystic kidney"', color: 'text-orange-700' },
+      { key: 'phenotype', value: '"Cystic kidney"', color: 'text-amber-800' },
       { key: 'background', value: '"C57BL/6J"', color: 'text-blue-700' },
       { key: 'zygosity', value: '"Homozygous"', color: 'text-primary font-bold' }
     ]
@@ -161,7 +161,8 @@ const getCardStyle = (index: number) => {
   return {
     transform: `translate3d(${x}px, ${y}px, ${z}px) scale(${scale})`,
     zIndex: zIndex,
-    opacity: Math.max(0.3, Math.min(1, opacity))
+    // Minimum 0.6 opacity ensures WCAG AA contrast compliance for text
+    opacity: Math.max(0.6, Math.min(1, opacity))
   }
 }
 
@@ -230,7 +231,7 @@ onUnmounted(() => {
             <div 
               v-for="(card, index) in cards" 
               :key="card.id"
-              class="absolute w-72 bg-white/90 backdrop-blur-md rounded-xl shadow-2xl border border-slate-200 overflow-hidden transition-transform duration-75 will-change-transform"
+              class="absolute w-72 bg-white backdrop-blur-md rounded-xl shadow-2xl border border-slate-200 overflow-hidden transition-transform duration-75 will-change-transform"
               :style="getCardStyle(index)"
             >
                <!-- Header -->
@@ -239,7 +240,7 @@ onUnmounted(() => {
                      <div class="w-2.5 h-2.5 rounded-full bg-slate-300"></div>
                      <div class="w-2.5 h-2.5 rounded-full bg-slate-300"></div>
                   </div>
-                  <div class="text-xs font-mono text-slate-500">{{ card.title }}</div>
+                  <div class="text-xs font-mono text-slate-600">{{ card.title }}</div>
                </div>
                <!-- Code/Content -->
                <div class="p-5 font-mono text-xs sm:text-sm text-slate-600 space-y-2">

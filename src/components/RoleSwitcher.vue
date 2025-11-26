@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, type Component } from 'vue'
 import { Dna, Stethoscope, Microscope } from 'lucide-vue-next'
 
-const roles: { id: RoleId; label: string; icon: any }[] = [
+const roles: { id: RoleId; label: string; icon: Component }[] = [
   { id: 'geneticist', label: 'Geneticist', icon: Dna },
   { id: 'clinician', label: 'Clinician', icon: Stethoscope },
   { id: 'researcher', label: 'Researcher', icon: Microscope },

@@ -53,10 +53,15 @@ const startX = ref(0)
 const startRotation = ref(0)
 let autoRotateInterval: number | null = null
 
-// Cache mobile check to avoid repeated layout calculations
+// Use matchMedia instead of window.innerWidth to avoid forced reflow
+// matchMedia doesn't trigger layout recalculation - it uses viewport dimensions
+// which are always available without querying the DOM
+// Reference: https://gist.github.com/paulirish/5d52fb081b3570c81e3a
 const isMobile = ref(false)
-const updateMobileState = () => {
-  isMobile.value = window.innerWidth < 640
+let mobileMediaQuery: MediaQueryList | null = null
+
+const handleMobileChange = (e: MediaQueryListEvent | MediaQueryList) => {
+  isMobile.value = e.matches
 }
 
 const startAutoRotate = () => {
@@ -161,14 +166,19 @@ const getCardStyle = (index: number) => {
 }
 
 onMounted(() => {
-  updateMobileState()
-  window.addEventListener('resize', updateMobileState, { passive: true })
+  // Use matchMedia for responsive detection - doesn't cause forced reflow
+  // unlike window.innerWidth which triggers synchronous layout
+  mobileMediaQuery = window.matchMedia('(max-width: 639px)')
+  handleMobileChange(mobileMediaQuery)
+  mobileMediaQuery.addEventListener('change', handleMobileChange)
   startAutoRotate()
 })
 
 onUnmounted(() => {
   stopAutoRotate()
-  window.removeEventListener('resize', updateMobileState)
+  if (mobileMediaQuery) {
+    mobileMediaQuery.removeEventListener('change', handleMobileChange)
+  }
   window.removeEventListener('mousemove', handleMouseMove)
   window.removeEventListener('mouseup', handleMouseUp)
 })

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, nextTick } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
 const isScrolled = ref(false)
 const isMenuOpen = ref(false)
@@ -27,11 +27,14 @@ const closeMenu = () => {
 }
 
 onMounted(() => {
-  // Set initial scroll state synchronously to avoid flicker
-  isScrolled.value = window.scrollY > 20
+  // Defer initial scroll read to next frame to avoid forced reflow during mount
+  // Reading window.scrollY during component initialization can cause layout thrashing
+  // Reference: https://gist.github.com/paulirish/5d52fb081b3570c81e3a
+  requestAnimationFrame(() => {
+    // Read scroll position at the start of frame (before any writes)
+    isScrolled.value = window.scrollY > 20
 
-  // Enable transitions after first paint to prevent initial flicker
-  nextTick(() => {
+    // Enable transitions after scroll state is set
     requestAnimationFrame(() => {
       enableTransitions.value = true
     })

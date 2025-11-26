@@ -9,7 +9,7 @@
       
       <div class="flex gap-8 text-sm">
         <a href="#" class="hover:text-white transition-colors">Imprint</a>
-        <a href="#" class="hover:text-white transition-colors">GitHub</a>
+        <a href="https://github.com/berntpopp/genefoundry" class="hover:text-white transition-colors">GitHub</a>
       </div>
     </div>
   </footer>

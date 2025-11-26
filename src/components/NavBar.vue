@@ -48,7 +48,7 @@ const links = [
   { name: 'Methodology', href: '#methodology' },
   { name: 'Perspectives', href: '#perspectives' },
   { name: 'Impact', href: '#impact' },
-  { name: 'GitHub', href: '#' },
+  { name: 'GitHub', href: 'https://github.com/berntpopp/genefoundry' },
 ]
 </script>
 

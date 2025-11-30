@@ -26,6 +26,9 @@ export default defineConfig({
     }),
     VitePWA({
       registerType: 'autoUpdate',
+      // Defer service worker registration to not block initial render
+      // 'script-defer' adds defer attribute, loading after HTML parsing (v0.17.2+)
+      injectRegister: 'script-defer',
       // DevOptions for testing PWA in development
       devOptions: {
         enabled: false
@@ -113,6 +116,14 @@ export default defineConfig({
     target: 'es2020',
     // Disable gzip size reporting for faster builds
     reportCompressedSize: false,
+    // Optimize module preloading - exclude non-critical chunks from preload
+    // This reduces critical path chain length (workbox-window is not needed for FCP)
+    modulePreload: {
+      resolveDependencies: (filename, deps) => {
+        // Only preload critical chunks, exclude PWA/workbox related
+        return deps.filter(dep => !dep.includes('workbox'))
+      }
+    },
     // Optimize chunk splitting
     rollupOptions: {
       output: {
@@ -123,8 +134,8 @@ export default defineConfig({
         }
       }
     },
-    // Enable CSS code splitting
-    cssCodeSplit: true,
+    // Disable CSS code splitting - single CSS file loads faster for small apps
+    cssCodeSplit: false,
     // Minification settings
     minify: 'esbuild',
   },

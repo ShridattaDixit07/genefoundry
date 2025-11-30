@@ -5,7 +5,6 @@
 | Guide | Description |
 |-------|-------------|
 | [VPS Setup](./vps-setup.md) | Deploy GeneFoundry on a VPS with Nginx Proxy Manager |
-| [Plausible Setup](./plausible-setup.md) | Self-host Plausible Analytics |
 
 ## Quick Reference
 

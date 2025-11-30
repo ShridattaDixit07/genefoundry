@@ -7,7 +7,7 @@
 
 ARG NODE_VERSION=20-alpine3.20
 # fholzer/nginx-brotli includes brotli_static and gzip_static modules
-ARG NGINX_VERSION=v1.26.2
+ARG NGINX_VERSION=v1.28.0
 
 # ============================================================================
 # STAGE 1: Dependencies - Install node_modules with cache

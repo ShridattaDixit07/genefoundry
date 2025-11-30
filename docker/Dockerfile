@@ -44,7 +44,7 @@ RUN npm run build && \
     echo "=== Build output ===" && \
     ls -la dist/ && \
     echo "=== Compressed files ===" && \
-    find dist -name "*.br" -o -name "*.gz" | head -20 && \
+    find dist \( -name "*.br" -o -name "*.gz" \) -print && \
     echo "=== Total size ===" && \
     du -sh dist/
 

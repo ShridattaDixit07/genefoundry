@@ -114,6 +114,19 @@ export default defineConfig({
     // Minification settings
     minify: 'esbuild',
   },
+  // Dev server config for WSL2 compatibility
+  server: {
+    host: true,
+    watch: {
+      // Use polling for WSL2 file system compatibility
+      usePolling: true,
+      interval: 1000
+    },
+    hmr: {
+      // Ensure HMR works across WSL2/Windows boundary
+      host: 'localhost'
+    }
+  },
   // Optimize dependency pre-bundling for dev server performance
   optimizeDeps: {
     include: [
@@ -129,7 +142,13 @@ export default defineConfig({
       'lucide-vue-next/dist/esm/icons/microscope.js',
       'lucide-vue-next/dist/esm/icons/activity.js',
       'lucide-vue-next/dist/esm/icons/users.js',
-      'lucide-vue-next/dist/esm/icons/globe.js'
+      'lucide-vue-next/dist/esm/icons/globe.js',
+      // Newsletter signup icons
+      'lucide-vue-next/dist/esm/icons/mail.js',
+      'lucide-vue-next/dist/esm/icons/arrow-right.js',
+      'lucide-vue-next/dist/esm/icons/check.js',
+      'lucide-vue-next/dist/esm/icons/alert-circle.js',
+      'lucide-vue-next/dist/esm/icons/loader-2.js'
     ],
     // Exclude the barrel file to prevent loading all icons
     exclude: ['lucide-vue-next']

@@ -37,23 +37,19 @@
   <meta name="twitter:description" content="From variant interpretation to literature synthesis. Trustworthy AI across genetic medicine, powered by Model Context Protocols." />
   <meta name="twitter:image" content="https://genefoundry.org/og-image.png" />
   <meta name="twitter:image:alt" content="GeneFoundry - Forging Trust in Genomic AI" />
-  <!-- Analytics: Plausible (self-hosted) - privacy-first, GDPR compliant, no cookies -->
-  <link rel="preconnect" href="https://plausible.genefoundry.org" />
-  <script defer data-domain="genefoundry.org" src="https://plausible.genefoundry.org/js/script.js"></script>
-
-  <!-- Font loading: preconnect first for faster connection -->
+  <!-- Font loading: preconnect FIRST for faster connection (before any font requests) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <!--
-    Font strategy: font-display=optional eliminates CLS entirely
-    - Font only used if loaded within ~100ms (before first paint)
-    - Combined with metric-matched fallback in style.css for seamless experience
-    - Repeat visitors get Inter from cache, first-time visitors get fallback
+    Font strategy: font-display=swap for fast text rendering
+    - Text renders immediately with fallback font
+    - Swaps to Inter when loaded (minimal layout shift with metric-matched fallback)
   -->
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=optional" as="style">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=optional" rel="stylesheet">
-  <!-- Preload critical assets -->
-  <link rel="preload" href="/genefoundry_logo.svg" as="image" type="image/svg+xml">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Analytics: Plausible (self-hosted) - enable after VPS setup -->
+  <!-- <link rel="preconnect" href="https://plausible.genefoundry.org" /> -->
+  <script defer data-domain="genefoundry.org" src="https://plausible.genefoundry.org/js/script.js"></script>
   <meta name="description"
     content="GeneFoundry is a modular registry for trustworthy, evidence-based genomic analysis powered by Model Context Protocols (MCPs). Solving AI hallucinations in genomics." />
   <meta name="keywords"

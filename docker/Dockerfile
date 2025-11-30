@@ -68,8 +68,10 @@ COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
 # Copy built application with pre-compressed files
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Set correct permissions (nginx image runs as root, drops privileges internally)
-RUN chmod -R 755 /usr/share/nginx/html
+# Update Alpine packages to patch CVEs, set permissions, and clean up
+RUN apk update && apk upgrade --no-cache && \
+    rm -rf /var/cache/apk/* && \
+    chmod -R 755 /usr/share/nginx/html
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \

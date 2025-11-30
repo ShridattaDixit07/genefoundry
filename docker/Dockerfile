@@ -2,11 +2,12 @@
 
 # ============================================================================
 # GeneFoundry Landing Page - Production Dockerfile
-# Multi-stage build: Node.js build → nginx-unprivileged runtime
+# Multi-stage build: Node.js build → nginx with Brotli runtime
 # ============================================================================
 
 ARG NODE_VERSION=20-alpine3.20
-ARG NGINX_VERSION=1.27-alpine3.20-slim
+# fholzer/nginx-brotli includes brotli_static and gzip_static modules
+ARG NGINX_VERSION=v1.27.3
 
 # ============================================================================
 # STAGE 1: Dependencies - Install node_modules with cache
@@ -23,11 +24,14 @@ RUN --mount=type=cache,target=/root/.npm \
     npm ci --ignore-scripts
 
 # ============================================================================
-# STAGE 2: Builder - Build static site
+# STAGE 2: Builder - Build static site with pre-compressed assets
 # ============================================================================
 FROM node:${NODE_VERSION} AS builder
 
 WORKDIR /app
+
+# Set base URL for Docker deployment (not GitHub Pages)
+ENV VITE_BASE_URL=/
 
 # Copy dependencies from deps stage
 COPY --from=deps /app/node_modules ./node_modules
@@ -35,17 +39,19 @@ COPY --from=deps /app/node_modules ./node_modules
 # Copy application source
 COPY . .
 
-# Build production static files
+# Build production static files (generates .br and .gz files)
 RUN npm run build && \
-    # Verify dist directory was created
+    echo "=== Build output ===" && \
     ls -la dist/ && \
-    # Show build size
+    echo "=== Compressed files ===" && \
+    find dist -name "*.br" -o -name "*.gz" | head -20 && \
+    echo "=== Total size ===" && \
     du -sh dist/
 
 # ============================================================================
-# STAGE 3: Runtime - nginx-unprivileged serving static files
+# STAGE 3: Runtime - nginx with Brotli serving pre-compressed static files
 # ============================================================================
-FROM nginxinc/nginx-unprivileged:${NGINX_VERSION} AS runtime
+FROM fholzer/nginx-brotli:${NGINX_VERSION} AS runtime
 
 # Metadata labels (OCI standard)
 LABEL org.opencontainers.image.title="GeneFoundry Landing Page" \
@@ -56,26 +62,31 @@ LABEL org.opencontainers.image.title="GeneFoundry Landing Page" \
       org.opencontainers.image.documentation="https://github.com/berntpopp/genefoundry/blob/main/README.md" \
       org.opencontainers.image.authors="Bernt Popp <bernt.popp@gmail.com>"
 
-# Copy nginx configuration (as nginx user)
-COPY --chown=nginx:nginx docker/nginx.conf /etc/nginx/conf.d/default.conf
+# Create nginx user if it doesn't exist and set up directories
+RUN addgroup -g 101 -S nginx 2>/dev/null || true && \
+    adduser -S -D -H -u 101 -h /var/cache/nginx -s /sbin/nologin -G nginx -g nginx nginx 2>/dev/null || true && \
+    mkdir -p /var/cache/nginx /var/run && \
+    chown -R nginx:nginx /var/cache/nginx /var/run
 
-# Copy built application (as nginx user)
-COPY --chown=nginx:nginx --from=builder /app/dist /usr/share/nginx/html
+# Copy nginx configuration
+COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
 
-# Remove default configs (need root temporarily)
-USER root
-RUN rm -f /etc/nginx/conf.d/*.conf.default && \
-    # Verify files were copied
-    ls -la /usr/share/nginx/html/
+# Copy built application with pre-compressed files
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+# Set correct permissions
+RUN chown -R nginx:nginx /usr/share/nginx/html && \
+    chmod -R 755 /usr/share/nginx/html
+
+# Switch to non-root user
 USER nginx
 
-# Health check (nginx-unprivileged runs on 8080)
+# Health check
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
     CMD curl -f http://localhost:8080/health || exit 1
 
-# Expose non-privileged port
+# Expose port
 EXPOSE 8080
 
-# Start nginx (runs as non-root user 'nginx' UID 101)
-ENTRYPOINT ["nginx"]
-CMD ["-g", "daemon off;"]
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"]

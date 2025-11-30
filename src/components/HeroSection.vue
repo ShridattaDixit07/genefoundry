@@ -3,7 +3,9 @@ import { ref, shallowRef, onMounted, onUnmounted, watch } from 'vue'
 import { usePrefersReducedMotion, useIsMobile } from '../composables'
 
 // Card Data - static content, no reactivity needed
+// Mix of data sources AND use cases to show platform breadth
 const cards = [
+  // Data Sources (what MCPs provide)
   {
     id: 'gnomad',
     title: 'mcp-server-gnomad',
@@ -12,6 +14,37 @@ const cards = [
       { key: 'gene', value: '"PKD1"', color: 'text-blue-700' },
       { key: 'af_popmax', value: '0.000042', color: 'text-amber-800' },
       { key: 'status', value: '"VERIFIED"', color: 'text-primary-dark font-bold' }
+    ]
+  },
+  {
+    id: 'pubtator',
+    title: 'mcp-server-pubtator',
+    content: [
+      { key: 'pmid', value: '342156...', color: 'text-blue-700' },
+      { key: 'entity', value: '"Polycystin-1"', color: 'text-green-700' },
+      { key: 'relation', value: '"interacts_with"', color: 'text-purple-700' },
+      { key: 'confidence', value: '0.98', color: 'text-primary-dark font-bold' }
+    ]
+  },
+  // Use Cases (what the platform enables)
+  {
+    id: 'literature',
+    title: 'task: literature-synthesis',
+    content: [
+      { key: 'query', value: '"BRCA1 variants"', color: 'text-blue-700' },
+      { key: 'papers', value: '1,247', color: 'text-amber-800' },
+      { key: 'key_finding', value: '"5x risk..."', color: 'text-green-700' },
+      { key: 'citations', value: '"VERIFIED"', color: 'text-primary-dark font-bold' }
+    ]
+  },
+  {
+    id: 'patient',
+    title: 'task: patient-explainer',
+    content: [
+      { key: 'condition', value: '"PKD"', color: 'text-purple-700' },
+      { key: 'audience', value: '"Family"', color: 'text-blue-700' },
+      { key: 'reading_level', value: '"Grade 6"', color: 'text-green-700' },
+      { key: 'status', value: '"COMPLETE"', color: 'text-primary-dark font-bold' }
     ]
   },
   {
@@ -25,23 +58,13 @@ const cards = [
     ]
   },
   {
-    id: 'pubtator',
-    title: 'mcp-server-pubtator',
+    id: 'curation',
+    title: 'task: gene-curation',
     content: [
-      { key: 'pmid', value: '342156...', color: 'text-blue-700' },
-      { key: 'entity', value: '"Polycystin-1"', color: 'text-green-700' },
-      { key: 'relation', value: '"interacts_with"', color: 'text-purple-700' },
-      { key: 'confidence', value: '0.98', color: 'text-primary-dark font-bold' }
-    ]
-  },
-  {
-    id: 'mgi',
-    title: 'mcp-server-mgi',
-    content: [
-      { key: 'model', value: '"Pkd1<tm1..."', color: 'text-purple-700' },
-      { key: 'phenotype', value: '"Cystic kidney"', color: 'text-amber-800' },
-      { key: 'background', value: '"C57BL/6J"', color: 'text-blue-700' },
-      { key: 'zygosity', value: '"Homozygous"', color: 'text-primary-dark font-bold' }
+      { key: 'gene', value: '"CFTR"', color: 'text-blue-700' },
+      { key: 'disease', value: '"Cystic Fibrosis"', color: 'text-purple-700' },
+      { key: 'validity', value: '"Definitive"', color: 'text-green-700' },
+      { key: 'evidence', value: '"CURATED"', color: 'text-primary-dark font-bold' }
     ]
   }
 ]

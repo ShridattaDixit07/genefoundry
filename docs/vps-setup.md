@@ -156,3 +156,21 @@ docker network inspect npm_default | grep genefoundry
 - Ensure DNS A record points to VPS IP
 - Wait 5 minutes for DNS propagation
 - Check NPM logs: `docker logs npm`
+
+---
+
+## Security Notes
+
+The Docker image automatically patches Alpine packages at build time. To ensure you have the latest security fixes:
+
+```bash
+# Rebuild with no cache to pull latest patches
+docker compose -f docker/docker-compose.yml -f docker/docker-compose.npm.yml build --no-cache
+docker compose -f docker/docker-compose.yml -f docker/docker-compose.npm.yml up -d
+```
+
+Run local security checks before deploying:
+
+```bash
+make pre-commit      # Full check: lint + type-check + security + build
+```

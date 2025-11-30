@@ -735,33 +735,45 @@ Track:
 - Video plays (if added)
 - Time on page
 
-#### 4.2 SEO Improvements
-- Add JSON-LD structured data (Organization, SoftwareApplication)
-- Create og:image for social sharing
-- Add meta descriptions
+#### 4.2 SEO Improvements ✅ COMPLETED (PR #16)
+- ✅ JSON-LD structured data (Organization, SoftwareApplication, WebSite)
+- ✅ Open Graph meta tags (og:title, og:description, og:image, og:url, og:site_name)
+- ✅ Twitter Cards (summary_large_image)
+- ✅ Canonical URL and robots meta
+- ✅ Updated sitemap.xml
 
-#### 4.3 Open Graph Preview
-Create shareable preview image:
-- GeneFoundry logo + tagline
-- Use for Twitter/LinkedIn sharing
-- 1200x630px recommended
+#### 4.3 Open Graph Preview ✅ COMPLETED (PR #16)
+- ✅ 1200x630px OG image with GeneFoundry logo + tagline
+- ✅ `npm run generate-og-image` / `make generate-og` to regenerate
+- ✅ Dark slate background with brand colors
 
 ---
 
 ## 12. Prioritized Task List
 
-### Pre-Pitch (Now → Dec 2025)
+### Completed (Nov 2025)
 
-| Priority | Task | Effort | Impact | Owner |
+| Task | PR | Status |
+|------|-----|--------|
+| Hero copy revision (broader scope) | #15 | ✅ Done |
+| Email capture component (Formspree) | #15 | ✅ Done |
+| Contact mailto link in footer | #15 | ✅ Done |
+| Update hero subhead to show breadth | #15 | ✅ Done |
+| OG image + SEO (JSON-LD, meta tags) | #16 | ✅ Done |
+| Twitter Cards + Open Graph | #16 | ✅ Done |
+| Consistent button hover colors | #15 | ✅ Done |
+| Team section title fix (Dr. Nina Rank) | #15 | ✅ Done |
+
+### Pre-Pitch Remaining (Now → Dec 2025)
+
+| Priority | Task | Effort | Impact | Notes |
 |----------|------|--------|--------|-------|
-| **P0** | Hero copy revision (broader scope) | 1-2 hrs | **Critical** | Nina + Dev |
-| **P0** | Email capture component | 2-4 hrs | High | Dev |
-| **P0** | Contact mailto link | 30 min | Medium | Dev |
-| **P1** | Update hero subhead to show breadth | 30 min | High | Dev |
-| **P2** | Analytics setup | 1-2 hrs | Medium | Dev |
-| **P3** | OG image + SEO | 2-3 hrs | Low | Dev |
+| **P1** | Analytics setup (Plausible/Umami) | 1-2 hrs | Medium | Track CTA clicks, scroll depth |
+| **P2** | Expand carousel with use case cards | 4-6 hrs | Medium | Show platform breadth visually |
+| **P2** | Update Perspectives with task examples | 2-3 hrs | Medium | Concrete value for each role |
+| **P3** | Problem-first stats section | 2-3 hrs | Low | "80% undiagnosed" more prominent |
 
-**Key insight:** The website currently undersells GeneFoundry's scope. Updating copy to reflect the full platform vision (variant analysis + literature + patient education + gene curation + more) should be P0.
+**Current status:** Core landing page complete with hero messaging, email capture, contact link, and SEO. Next priority is analytics to track engagement before the DCS pitch.
 
 ### Post-Pitch (Q1 2026+)
 
@@ -882,6 +894,40 @@ The pitch narrative should lean into ONE primary direction:
 
 ---
 
+## 15. Pre-Launch Checklist Status
+
+Based on [biotech landing page best practices](https://www.ladybugz.com/best-biotech-website-examples-2024/) and [startup pre-launch guidelines](https://www.leadpages.com/blog/pre-launch-landing-page):
+
+### Core Elements
+| Element | Status | Notes |
+|---------|--------|-------|
+| Clear value proposition (above fold) | ✅ | "Forging Trust in Genomic AI" |
+| Problem statement | ✅ | Hero copy addresses AI hallucination issue |
+| Single primary CTA | ✅ | GitHub link (pre-launch appropriate) |
+| Email capture | ✅ | Newsletter signup with Formspree |
+| Social proof / credibility | ✅ | Team section with Charité/BIH affiliation |
+| Mobile optimization | ✅ | Responsive design, hamburger nav |
+
+### SEO & Sharing
+| Element | Status | Notes |
+|---------|--------|-------|
+| Meta title & description | ✅ | Optimized for search |
+| Open Graph tags | ✅ | 1200x630 branded image |
+| Twitter Cards | ✅ | summary_large_image |
+| JSON-LD structured data | ✅ | Organization + SoftwareApplication |
+| Canonical URL | ✅ | https://genefoundry.org/ |
+| Sitemap | ✅ | /sitemap.xml |
+| Robots.txt | ✅ | Allow all |
+
+### Remaining Pre-Launch
+| Element | Status | Priority |
+|---------|--------|----------|
+| Analytics (Plausible/Umami) | ❌ | P1 |
+| A/B testing capability | ❌ | P3 (post-launch) |
+| Performance monitoring | ❌ | P3 (post-launch) |
+
+---
+
 ## Sources
 
 - [Unbounce: 40 Best Landing Page Examples 2024](https://unbounce.com/landing-page-examples/best-landing-page-examples/)
@@ -890,3 +936,5 @@ The pitch narrative should lean into ONE primary direction:
 - [Ladybugz: Best Biotech Website Examples 2024](https://www.ladybugz.com/best-biotech-website-examples-2024/)
 - [CyberOptik: Best Biotech Website Designs 2025](https://www.cyberoptik.net/blog/best-biotech-website-designs/)
 - [Landingi: Startup Landing Page Best Practices](https://landingi.com/landing-page/startup-best-practices/)
+- [TopLink: What Should Be on Your Biotech Landing Page](https://www.toplinkdesign.com/post/what-should-be-on-your-biotech-landing-page)
+- [Leadpages: Pre-Launch Landing Pages](https://www.leadpages.com/blog/pre-launch-landing-page)

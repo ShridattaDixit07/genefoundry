@@ -172,8 +172,8 @@ export default defineConfig({
       'lucide-vue-next/dist/esm/icons/mail.js',
       'lucide-vue-next/dist/esm/icons/arrow-right.js',
       'lucide-vue-next/dist/esm/icons/check.js',
-      'lucide-vue-next/dist/esm/icons/alert-circle.js',
-      'lucide-vue-next/dist/esm/icons/loader-2.js'
+      'lucide-vue-next/dist/esm/icons/circle-alert.js',
+      'lucide-vue-next/dist/esm/icons/loader-circle.js'
     ],
     // Exclude the barrel file to prevent loading all icons
     exclude: ['lucide-vue-next']

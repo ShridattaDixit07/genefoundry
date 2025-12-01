@@ -1,6 +1,8 @@
 # GeneFoundry Landing Page
 
-[![Deploy to GitHub Pages](https://github.com/berntpopp/genefoundry/actions/workflows/deploy.yml/badge.svg)](https://github.com/berntpopp/genefoundry/actions/workflows/deploy.yml)
+[![Security](https://github.com/berntpopp/genefoundry/actions/workflows/security.yml/badge.svg)](https://github.com/berntpopp/genefoundry/actions/workflows/security.yml)
+
+**Live:** [https://genefoundry.org/](https://genefoundry.org/)
 
 This repository contains the frontend code for the GeneFoundry landing page.
 

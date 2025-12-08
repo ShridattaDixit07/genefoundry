@@ -33,7 +33,7 @@ const team: TeamMember[] = [
     role: 'lead',
     expertise: ['Rare Diseases', 'Clinical Genomics', 'Translational Medicine'],
     tagline: 'Driving GeneFoundry from concept to clinical practice',
-    affiliation: 'Charité — Digital Junior Clinician Scientist Program'
+    affiliation: 'Charité — Junior Digital Clinician Scientist Program'
   },
   {
     id: 'bernt-popp',

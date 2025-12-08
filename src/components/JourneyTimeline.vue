@@ -75,7 +75,7 @@ const milestones: Milestone[] = [
     shortTitle: 'Selected',
     date: 'Nov 2025',
     description: 'Proposal selected for committee presentation from competitive applicant pool.',
-    status: 'current',
+    status: 'completed',
     icon: 'Award'
   },
   {
@@ -84,7 +84,7 @@ const milestones: Milestone[] = [
     shortTitle: 'Pitch',
     date: 'Dec 2025',
     description: 'Presentation to Digital Clinician Scientist committee at BIH.',
-    status: 'upcoming',
+    status: 'current',
     icon: 'Presentation'
   },
   {

